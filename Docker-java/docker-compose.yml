@@ -1,12 +1,1 @@
 
-
-services:
-    Postgresql:
-       container_name: Postgresql_container
-       image: postgres:15-alpine
-       ports:
-         - 5432:5432
-       environment:
-         POSTGRES_USER : lakshan
-         POSTGRES_PASSWORD : postgres123
-         POSTGRES_DB : user_details
