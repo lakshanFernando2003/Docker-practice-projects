@@ -1,0 +1,36 @@
+services:
+  server:
+    build: ./server
+    container_name: server_container
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    env_file:
+      - ./server/.env
+    hostname: server
+    networks:
+      - app-network
+
+  client:
+    build: ./client
+    container_name: client_container
+    ports:
+      - "5173:5173"
+    depends_on:
+      - server
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    networks:
+      - app-network
+      
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongo_data:
